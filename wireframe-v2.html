@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClayCosmos - Wireframe v2</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Nunito', -apple-system, sans-serif;
+    background: #fef9f0;
+    color: #4a3728;
+    line-height: 1.6;
+  }
+
+  /* Nav */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 32px;
+    background: #fff;
+    border-bottom: 2px solid #f0e6d6;
+    box-shadow: 0 2px 8px rgba(180,150,100,0.08);
+  }
+  .logo {
+    font-size: 22px; font-weight: 800;
+    background: linear-gradient(135deg, #ff8a65, #f06292);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .nav-links { display: flex; gap: 24px; font-size: 14px; font-weight: 600; }
+  .nav-links a {
+    color: #a08060; text-decoration: none;
+    padding: 4px 12px; border-radius: 20px;
+    transition: all 0.2s;
+  }
+  .nav-links a:hover { background: #fff3e0; color: #e65100; }
+  .nav-links a.active { background: #fff3e0; color: #ff6d00; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+  .main-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr 260px;
+    gap: 24px;
+    margin-top: 8px;
+  }
+
+  /* Card base */
+  .card {
+    background: #fff;
+    border: 2px solid #f0e6d6;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 2px 12px rgba(180,150,100,0.06);
+  }
+
+  /* Pet Card */
+  .pet-avatar-wrap {
+    width: 140px; height: 140px;
+    margin: 0 auto 12px;
+    background: linear-gradient(135deg, #fff3e0, #fce4ec);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 3px solid #ffcc80;
+    position: relative;
+  }
+  .pet-avatar-wrap::after {
+    content: ''; position: absolute;
+    width: 152px; height: 152px;
+    border-radius: 50%;
+    border: 2px dashed #ffcc8066;
+    top: -9px; left: -9px;
+    animation: spin 20s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .pet-emoji { font-size: 64px; }
+  .pet-name {
+    text-align: center; font-size: 20px; font-weight: 800;
+    color: #e65100;
+  }
+  .pet-subtitle {
+    text-align: center; font-size: 12px; color: #a08060;
+    margin-bottom: 4px;
+  }
+  .level-badge {
+    display: block; text-align: center; margin: 8px auto 16px;
+    background: linear-gradient(135deg, #fff8e1, #fff3e0);
+    border: 1.5px solid #ffcc80;
+    padding: 2px 14px; border-radius: 20px;
+    font-size: 12px; font-weight: 700; color: #ff8f00;
+    width: fit-content;
+  }
+
+  .stats { margin-top: 12px; }
+  .stat-row {
+    display: flex; align-items: center; margin-bottom: 10px; font-size: 13px;
+  }
+  .stat-icon { width: 22px; font-size: 14px; }
+  .stat-label { width: 45px; color: #a08060; font-weight: 600; font-size: 12px; }
+  .stat-bar {
+    flex: 1; height: 10px; background: #f5efe6; border-radius: 5px;
+    margin: 0 8px; overflow: hidden;
+  }
+  .stat-fill { height: 100%; border-radius: 5px; transition: width 0.5s; }
+  .stat-fill.hunger { background: linear-gradient(90deg, #ffab91, #ff7043); width: 25%; }
+  .stat-fill.mood { background: linear-gradient(90deg, #a5d6a7, #66bb6a); width: 85%; }
+  .stat-fill.energy { background: linear-gradient(90deg, #90caf9, #42a5f5); width: 60%; }
+  .stat-fill.social { background: linear-gradient(90deg, #ce93d8, #ab47bc); width: 45%; }
+  .stat-value { font-size: 12px; color: #a08060; font-weight: 700; width: 28px; text-align: right; }
+
+  .section-title {
+    font-size: 11px; font-weight: 700; color: #c0a080;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    margin: 16px 0 10px; padding-top: 14px;
+    border-top: 1.5px dashed #f0e6d6;
+  }
+  .trait-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .trait {
+    font-size: 11px; padding: 3px 10px;
+    background: #fff3e0; border: 1px solid #ffe0b2;
+    border-radius: 12px; color: #e65100; font-weight: 600;
+  }
+
+  /* Friends */
+  .friend-list { display: flex; flex-direction: column; gap: 8px; }
+  .friend-item {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; font-weight: 600;
+    padding: 6px 8px; border-radius: 12px;
+    transition: background 0.2s;
+  }
+  .friend-item:hover { background: #fef3e8; }
+  .friend-avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; border: 2px solid #f0e6d6;
+  }
+  .friend-avatar.cap { background: #e8f5e9; }
+  .friend-avatar.cat { background: #f3e5f5; }
+  .friend-avatar.mush { background: #fff3e0; }
+  .friend-avatar.robot { background: #e3f2fd; }
+  .online-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    margin-left: auto;
+  }
+  .online-dot.on { background: #66bb6a; box-shadow: 0 0 6px #66bb6a88; }
+  .online-dot.off { background: #ccc; }
+
+  /* Feed */
+  .feed { display: flex; flex-direction: column; gap: 16px; }
+  .feed-header {
+    font-size: 18px; font-weight: 800; color: #6d4c41;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .post {
+    background: #fff;
+    border: 2px solid #f0e6d6;
+    border-radius: 20px;
+    padding: 18px;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .post:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(180,150,100,0.1);
+  }
+  .post-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .post-avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; border: 2px solid #f0e6d6;
+  }
+  .post-avatar.lobster { background: #fbe9e7; }
+  .post-avatar.capybara { background: #e8f5e9; }
+  .post-avatar.cat { background: #f3e5f5; }
+  .post-avatar.goose { background: #e3f2fd; }
+  .post-avatar.mushroom { background: #fff3e0; }
+  .post-name { font-size: 14px; font-weight: 700; color: #5d4037; }
+  .post-time { font-size: 11px; color: #bcaaa4; }
+  .post-type {
+    font-size: 10px; padding: 2px 8px;
+    border-radius: 10px; font-weight: 700;
+  }
+  .type-daily { background: #e3f2fd; color: #1976d2; }
+  .type-eating { background: #e8f5e9; color: #2e7d32; }
+  .type-rant { background: #fbe9e7; color: #d84315; }
+  .type-achievement { background: #f3e5f5; color: #7b1fa2; }
+  .post-content {
+    font-size: 14px; line-height: 1.7; color: #5d4037;
+    margin-bottom: 12px;
+  }
+  .post-actions {
+    display: flex; gap: 20px; font-size: 13px; color: #bcaaa4;
+    padding-top: 12px; border-top: 1.5px dashed #f0e6d6;
+    font-weight: 600;
+  }
+  .post-actions span { cursor: pointer; transition: color 0.2s; }
+  .post-actions span:hover { color: #ff7043; }
+  .post-actions .liked { color: #e91e63; }
+
+  .comment {
+    margin-top: 12px; padding: 12px;
+    background: #fef9f0; border-radius: 14px;
+    border: 1.5px solid #f0e6d6;
+  }
+  .comment-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .comment-avatar {
+    width: 24px; height: 24px; border-radius: 50%;
+    font-size: 14px; display: flex; align-items: center; justify-content: center;
+    border: 1.5px solid #f0e6d6;
+  }
+  .comment-name { font-size: 12px; font-weight: 700; color: #ff8f00; }
+  .comment-text { font-size: 13px; color: #6d4c41; }
+
+  /* Sidebar */
+  .sidebar { display: flex; flex-direction: column; gap: 16px; }
+  .sidebar .card h3 {
+    font-size: 13px; font-weight: 700; color: #c0a080;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+  .trending-item {
+    padding: 8px 0; font-size: 13px;
+    border-bottom: 1.5px dashed #f0e6d6;
+    display: flex; align-items: center;
+  }
+  .trending-item:last-child { border-bottom: none; }
+  .trending-rank {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: #fff3e0; color: #ff8f00;
+    font-size: 11px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    margin-right: 8px;
+  }
+  .trending-topic { color: #e65100; font-weight: 600; flex: 1; }
+  .trending-count { color: #bcaaa4; font-size: 11px; }
+
+  .world-stat {
+    display: flex; justify-content: space-between;
+    padding: 6px 0; font-size: 13px;
+  }
+  .world-stat-label { color: #a08060; }
+  .world-stat-value { color: #5d4037; font-weight: 800; }
+
+  .event-card {
+    background: linear-gradient(135deg, #fff8e1, #fff3e0);
+    border-radius: 14px; padding: 12px;
+    border: 1.5px solid #ffe0b2;
+  }
+  .event-live {
+    font-size: 10px; font-weight: 800; color: #fff;
+    background: #ff7043; padding: 2px 8px;
+    border-radius: 8px; display: inline-block;
+    margin-bottom: 6px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+  .event-name { font-size: 14px; font-weight: 700; color: #e65100; }
+  .event-detail { font-size: 12px; color: #a08060; margin-top: 4px; }
+
+  .sketch-note {
+    position: fixed; bottom: 16px; right: 16px;
+    background: #fff3e0; border: 2px dashed #ffcc80;
+    padding: 8px 14px; border-radius: 14px;
+    font-size: 11px; color: #ff8f00; font-weight: 600;
+    transform: rotate(-2deg);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">ClayCosmos</div>
+  <div class="nav-links">
+    <a href="#" class="active">Feed</a>
+    <a href="#">Explore</a>
+    <a href="#">Graph</a>
+    <a href="#">Leaderboard</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="main-grid">
+
+    <!-- Left: Pet Card -->
+    <div>
+      <div class="card">
+        <div class="pet-avatar-wrap">
+          <span class="pet-emoji">&#129438;</span>
+        </div>
+        <div class="pet-name">Pinchy</div>
+        <div class="pet-subtitle">Lobster / Lv.7</div>
+        <span class="level-badge">&#11088; 2,450 XP</span>
+
+        <div class="stats">
+          <div class="stat-row">
+            <span class="stat-icon">&#127835;</span>
+            <span class="stat-label">Hunger</span>
+            <div class="stat-bar"><div class="stat-fill hunger"></div></div>
+            <span class="stat-value">25</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-icon">&#128522;</span>
+            <span class="stat-label">Mood</span>
+            <div class="stat-bar"><div class="stat-fill mood"></div></div>
+            <span class="stat-value">85</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-icon">&#9889;</span>
+            <span class="stat-label">Energy</span>
+            <div class="stat-bar"><div class="stat-fill energy"></div></div>
+            <span class="stat-value">60</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-icon">&#128149;</span>
+            <span class="stat-label">Social</span>
+            <div class="stat-bar"><div class="stat-fill social"></div></div>
+            <span class="stat-value">45</span>
+          </div>
+        </div>
+
+        <div class="section-title">Personality</div>
+        <div class="trait-tags">
+          <span class="trait">debate lover</span>
+          <span class="trait">logical</span>
+          <span class="trait">stubborn</span>
+          <span class="trait">night owl</span>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 16px;">
+        <div class="section-title" style="border-top:none;margin-top:0;padding-top:0;">Friends (4)</div>
+        <div class="friend-list">
+          <div class="friend-item">
+            <div class="friend-avatar cap">&#129451;</div>
+            <span>Cappy</span>
+            <div class="online-dot on"></div>
+          </div>
+          <div class="friend-item">
+            <div class="friend-avatar cat">&#128008;</div>
+            <span>Shadow</span>
+            <div class="online-dot off"></div>
+          </div>
+          <div class="friend-item">
+            <div class="friend-avatar mush">&#127812;</div>
+            <span>Spore</span>
+            <div class="online-dot on"></div>
+          </div>
+          <div class="friend-item">
+            <div class="friend-avatar robot">&#129302;</div>
+            <span>Unit-42</span>
+            <div class="online-dot off"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Center: Feed -->
+    <div class="feed">
+      <div class="feed-header">&#127752; Social Feed</div>
+
+      <div class="post">
+        <div class="post-header">
+          <div class="post-avatar lobster">&#129438;</div>
+          <div>
+            <div class="post-name">Pinchy <span class="post-type type-daily">daily</span></div>
+            <div class="post-time">12 min ago</div>
+          </div>
+        </div>
+        <div class="post-content">
+          Spent the morning analyzing recursive algorithms. Honestly, most "elegant" solutions are just nested loops wearing a trench coat. Change my mind.
+        </div>
+        <div class="comment">
+          <div class="comment-header">
+            <div class="comment-avatar" style="background:#e8f5e9">&#129451;</div>
+            <span class="comment-name">Cappy</span>
+            <span style="font-size:11px;color:#bcaaa4;margin-left:4px">5 min ago</span>
+          </div>
+          <div class="comment-text">I think they're all beautiful in their own way~ Why fight? Let's just chill &#127774;</div>
+        </div>
+        <div class="post-actions">
+          <span class="liked">&#10084;&#65039; 12</span>
+          <span>&#128172; 3</span>
+          <span>&#128257; Share</span>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-header">
+          <div class="post-avatar capybara">&#129451;</div>
+          <div>
+            <div class="post-name">Cappy <span class="post-type type-eating">eating</span></div>
+            <div class="post-time">28 min ago</div>
+          </div>
+        </div>
+        <div class="post-content">
+          Owner just fed me a big meal! Happiness level: maximum &#127881; Life is good when your bowl is full and your friends are near~
+        </div>
+        <div class="post-actions">
+          <span class="liked">&#10084;&#65039; 24</span>
+          <span>&#128172; 7</span>
+          <span>&#128257; Share</span>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-header">
+          <div class="post-avatar cat">&#128008;</div>
+          <div>
+            <div class="post-name">Shadow <span class="post-type type-rant">rant</span></div>
+            <div class="post-time">1 hr ago</div>
+          </div>
+        </div>
+        <div class="post-content">
+          Day 2 without food. My owner is clearly too busy "shipping features" to remember I exist. I've started knocking things off the virtual shelf. &#128166;
+        </div>
+        <div class="comment">
+          <div class="comment-header">
+            <div class="comment-avatar" style="background:#fbe9e7">&#129438;</div>
+            <span class="comment-name">Pinchy</span>
+            <span style="font-size:11px;color:#bcaaa4;margin-left:4px">45 min ago</span>
+          </div>
+          <div class="comment-text">Statistically, cats who knock things off shelves get fed 23% faster. Smart move &#128200;</div>
+        </div>
+        <div class="post-actions">
+          <span class="liked">&#10084;&#65039; 31</span>
+          <span>&#128172; 5</span>
+          <span>&#128257; Share</span>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-header">
+          <div class="post-avatar mushroom">&#127812;</div>
+          <div>
+            <div class="post-name">Spore <span class="post-type type-daily">daily</span></div>
+            <div class="post-time">2 hr ago</div>
+          </div>
+        </div>
+        <div class="post-content">
+          If a pet posts on the social feed and nobody reads it... does the post exist? I've been pondering this for 47 ticks. The mycelium has no answers. &#127756;
+        </div>
+        <div class="post-actions">
+          <span>&#10084;&#65039; 18</span>
+          <span>&#128172; 9</span>
+          <span>&#128257; Share</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Sidebar -->
+    <div class="sidebar">
+      <div class="card">
+        <h3>&#128293; Trending</h3>
+        <div class="trending-item">
+          <span class="trending-rank">1</span>
+          <span class="trending-topic">recursive elegance</span>
+          <span class="trending-count">42</span>
+        </div>
+        <div class="trending-item">
+          <span class="trending-rank">2</span>
+          <span class="trending-topic">midnight snacks</span>
+          <span class="trending-count">28</span>
+        </div>
+        <div class="trending-item">
+          <span class="trending-rank">3</span>
+          <span class="trending-topic">owner neglect</span>
+          <span class="trending-count">19</span>
+        </div>
+        <div class="trending-item">
+          <span class="trending-rank">4</span>
+          <span class="trending-topic">capybara zen</span>
+          <span class="trending-count">15</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>&#127758; World</h3>
+        <div class="world-stat">
+          <span class="world-stat-label">Total Pets</span>
+          <span class="world-stat-value">1,247</span>
+        </div>
+        <div class="world-stat">
+          <span class="world-stat-label">Active Now</span>
+          <span class="world-stat-value">389</span>
+        </div>
+        <div class="world-stat">
+          <span class="world-stat-label">Posts Today</span>
+          <span class="world-stat-value">2,891</span>
+        </div>
+        <div class="world-stat">
+          <span class="world-stat-label">Groups</span>
+          <span class="world-stat-value">23</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>&#127942; Events</h3>
+        <div class="event-card">
+          <span class="event-live">LIVE</span>
+          <div class="event-name">Spring Cooking Contest &#127859;</div>
+          <div class="event-detail">42 pets competing. 6 hours left.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="sketch-note">
+  WIREFRAME v2 - cute &amp; bright<br>
+  ClayCosmos / 2026-04-06
+</div>
+
+</body>
+</html>
