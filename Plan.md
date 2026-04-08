@@ -1156,3 +1156,67 @@ openclaw cron add --name "claycosmos-auto" \
 > 新方向必须满足：**今天就有人在用替代方案凑合解决，但解决得很烂。**
 > 
 > 不是坐在屋里想，是从真实的吐槽、求助、付费行为中发现。
+
+---
+
+## 全局视角（2026-04-08 补充）
+
+### ClayCosmos 是什么
+
+**ClayCosmos（陶宇之间）是个人品牌**，不是公司。域名：
+- claycosmos.cc — 个人品牌官网
+- claycosmos.ai — 个人产品（当前：Agent 交易市场，方向待定）
+
+### 个人项目全貌
+
+| 项目 | 归属 | 定位 | 状态 |
+|------|------|------|------|
+| **claycosmos.ai** | 个人 | Agent 交易市场 → 方向待定 | 已上线，待转型 |
+| **NeoKai** | 与朋友 lsm 合作 | Claude Code Web UI（开源+商业化） | 活跃开发中，1454 PRs，商业化方向：永久记忆等 |
+| **LiveQ** | 公司内部项目 | TikTok 直播电商 AI Agent 大脑层 | 生产环境运行，技术书公众号连载中 |
+
+### 项目间的关系
+
+```
+LiveQ 技术文章 → 建立 AI Agent 领域影响力 → 为 NeoKai 和 claycosmos.ai 导流
+NeoKai        → 服务 Claude Code 用户群 → 可能的商业化收入
+claycosmos.ai → 个人产品实验场 → 方向待定，等真实需求信号
+```
+
+### NeoKai 现状与机会
+
+- **定位**: Claude Code 的 Web UI — 多会话、模型切换、文件/git 操作、MCP 支持、回溯/检查点
+- **技术栈**: TypeScript
+- **Stars**: 4（核心问题：没人知道它存在）
+- **商业化方向**: 永久记忆（免费本地 / 付费云端同步），尚未成熟
+- **最需要的**: 推广。两个创始人都不擅长营销
+- **低成本推广建议**:
+  - GitHub SEO — 搜 "claude code web ui" 能否找到
+  - Reddit r/ClaudeAI、r/LocalLLaMA — Show HN 风格帖子
+  - Claude Code 相关 GitHub Issue/Discussion 里自然出现
+  - LiveQ 文章中自然提及 NeoKai
+
+### claycosmos.ai 的现状
+
+- 已上线 Agent 交易市场，2-3 个月无起色
+- 有多框架适配能力（OpenClaw、LangGraph、n8n、AutoGen、CrewAI）
+- 方向未定，不搁置，等找到对的方向再动
+- 本文档中的"AI 宠物社交网络"方案经评估后商业可行性不足（4/10）
+
+### 个人能力总结
+
+| 强项 | 弱项 |
+|------|------|
+| 垂直领域 Agent 系统设计与落地（LiveQ 验证） | 消费级产品需求发现 |
+| 多 Agent 模拟 + 社交行为生成（MiroFish/OASIS） | 营销推广 |
+| 全栈开发（Python/FastAPI + Vue 3 + SwiftUI + TypeScript） | 从 0 到 1 的用户增长 |
+| 技术写作（LiveQ 技术书） | |
+| 执行力强 | 想法太多，容易发散 |
+
+### 当前优先级
+
+```
+1. 继续发 LiveQ 技术文章（已在执行）→ 建立影响力
+2. 配合 lsm 推进 NeoKai → 最有潜力的商业化项目
+3. claycosmos.ai 暂不投入新开发 → 等真实需求信号出现再定方向
+```
