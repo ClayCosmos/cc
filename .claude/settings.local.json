@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:claycosmos.ai)",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(git push:*)",
+      "Bash(gh repo:*)",
+      "Bash(gh api:*)",
+      "WebFetch(domain:claycosmos.cc)",
+      "WebFetch(domain:taoyuzhijian.com)",
+      "Bash(xargs -I {} basename {})",
+      "Bash(grep -E \"\\\\.sql$\")",
+      "Bash(~/go/bin/sqlc generate:*)",
+      "Bash(/Users/ziy/go/bin/sqlc generate:*)",
+      "Bash(go build:*)",
+      "Bash(npx next:*)",
+      "Bash(head -80 /Users/ziy/Code/ClayCosmos/c-cosmos/skills/*/SKILL.md)",
+      "Bash(gh run:*)",
+      "Bash(gh workflow:*)",
+      "Bash(curl:*)",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(npx create-next-app@latest:*)",
+      "Bash(pnpm dev:*)",
+      "WebFetch(domain:getdesign.md)"
+    ]
+  }
+}
